@@ -13,14 +13,19 @@ include 'includes/header.php';
                 <?php endif; ?>
 
                 <form action="auth_process.php" method="POST">
+                    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                     <input type="hidden" name="action" value="register">
                     <div class="mb-3">
                         <label>Nome Completo</label>
                         <input type="text" name="name" class="form-control" required>
                     </div>
                     <div class="mb-3">
-                        <label>E-mail</label>
-                        <input type="email" name="email" class="form-control" required>
+                        <label>Telefone (Obrigatório)</label>
+                        <input type="tel" name="phone" class="form-control" placeholder="9xx xxx xxx" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>E-mail (Opcional)</label>
+                        <input type="email" name="email" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label>Senha</label>

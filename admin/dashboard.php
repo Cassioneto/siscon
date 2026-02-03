@@ -18,8 +18,8 @@ $total_doctors = $stmt->fetchColumn();
 $stmt = $pdo->query("SELECT COUNT(*) FROM appointments");
 $total_appointments = $stmt->fetchColumn();
 
-$stmt = $pdo->query("SELECT COUNT(*) FROM users WHERE role = 'attendant'");
-$total_attendants = $stmt->fetchColumn();
+$stmt = $pdo->query("SELECT COUNT(*) FROM users WHERE role = 'cataloger'");
+$total_catalogers = $stmt->fetchColumn();
 ?>
 
 <h2>Painel Administrativo</h2>
@@ -55,9 +55,9 @@ $total_attendants = $stmt->fetchColumn();
     </div>
     <div class="col-md-3">
         <div class="card text-white bg-info mb-3">
-            <div class="card-header">Atendentes</div>
+            <div class="card-header">Catalogadoras</div>
             <div class="card-body">
-                <h5 class="card-title"><?php echo $total_attendants; ?></h5>
+                <h5 class="card-title"><?php echo $total_catalogers; ?></h5>
                 <a href="users.php" class="text-white">Gerenciar Equipe</a>
             </div>
         </div>

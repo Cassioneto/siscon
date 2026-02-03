@@ -5,9 +5,13 @@ include 'includes/header.php';
 
 <div class="row justify-content-center">
     <div class="col-md-5">
+        <div class="text-center mb-4">
+            <img src="logo.jpg" alt="Logo" style="max-height: 100px;">
+            <h4 class="mt-2 text-success" style="font-weight: 700;">HOSPITAL PSIQUIÁTRICO DE LUANDA</h4>
+        </div>
         <div class="card">
-            <div class="card-header bg-primary text-white">Login</div>
-            <div class="card-body">
+            <div class="card-header text-center">Acesso ao Sistema</div>
+            <div class="card-body p-4">
                 <?php if(isset($_SESSION['error'])): ?>
                     <div class="alert alert-danger"><?php echo $_SESSION['error']; unset($_SESSION['error']); ?></div>
                 <?php endif; ?>
@@ -16,10 +20,11 @@ include 'includes/header.php';
                 <?php endif; ?>
 
                 <form action="auth_process.php" method="POST">
+                    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                     <input type="hidden" name="action" value="login">
                     <div class="mb-3">
-                        <label>E-mail</label>
-                        <input type="email" name="email" class="form-control" required>
+                        <label>E-mail ou Telefone</label>
+                        <input type="text" name="email" class="form-control" required>
                     </div>
                     <div class="mb-3">
                         <label>Senha</label>

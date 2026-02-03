@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_staff'])) {
     $name = trim($_POST['name']);
     $email = trim($_POST['email']);
     $password = $_POST['password'];
-    $role = $_POST['role']; // admin or attendant
+    $role = $_POST['role']; // admin or cataloger
 
     if (!empty($name) && !empty($email) && !empty($password)) {
         // Check email
@@ -26,7 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_staff'])) {
                 $stmt->execute([$name, $email, $hashed, $role]);
                 $success = "Usuário adicionado!";
             } catch (PDOException $e) {
-                $error = "Erro: " . $e->getMessage();
+                error_log("Erro add_staff: " . $e->getMessage());
+                $error = "Erro interno ao adicionar usuário.";
             }
         }
     }
@@ -41,7 +42,8 @@ if (isset($_GET['delete'])) {
             $stmt->execute([$id]);
             $success = "Usuário removido!";
         } catch (PDOException $e) {
-            $error = "Erro: " . $e->getMessage();
+            error_log("Erro delete_staff: " . $e->getMessage());
+            $error = "Erro interno ao remover usuário.";
         }
     } else {
         $error = "Você não pode se excluir.";
@@ -57,10 +59,10 @@ include '../includes/header.php';
         <a href="dashboard.php" class="btn btn-secondary mb-3">Voltar</a>
         
         <?php if(isset($error)): ?>
-            <div class="alert alert-danger"><?php echo $error; ?></div>
+            <div class="alert alert-danger"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
         <?php if(isset($success)): ?>
-            <div class="alert alert-success"><?php echo $success; ?></div>
+            <div class="alert alert-success"><?php echo htmlspecialchars($success); ?></div>
         <?php endif; ?>
 
         <div class="card mb-4">
@@ -78,7 +80,7 @@ include '../includes/header.php';
                     </div>
                     <div class="col-md-2">
                         <select name="role" class="form-select">
-                            <option value="attendant">Atendente</option>
+                            <option value="cataloger">Catalogadora</option>
                             <option value="admin">Administrador</option>
                         </select>
                     </div>
@@ -90,7 +92,7 @@ include '../includes/header.php';
         </div>
 
         <div class="card">
-            <div class="card-header">Lista de Usuários (Admin/Atendentes)</div>
+            <div class="card-header">Lista de Usuários (Admin/Catalogadoras)</div>
             <div class="card-body">
                 <table class="table table-striped">
                     <thead>
@@ -104,12 +106,12 @@ include '../includes/header.php';
                     </thead>
                     <tbody>
                         <?php
-                        $stmt = $pdo->query("SELECT * FROM users WHERE role IN ('admin', 'attendant') ORDER BY name");
+                        $stmt = $pdo->query("SELECT * FROM users WHERE role IN ('admin', 'cataloger') ORDER BY name");
                         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                             echo "<tr>";
                             echo "<td>{$row['id']}</td>";
-                            echo "<td>{$row['name']}</td>";
-                            echo "<td>{$row['email']}</td>";
+                            echo "<td>" . htmlspecialchars($row['name'] ?? '') . "</td>";
+                            echo "<td>" . htmlspecialchars($row['email'] ?? '') . "</td>";
                             echo "<td><span class='badge bg-info'>{$row['role']}</span></td>";
                             echo "<td>";
                             if ($row['id'] != $_SESSION['user_id']) {

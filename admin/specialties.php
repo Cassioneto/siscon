@@ -78,7 +78,7 @@ include '../includes/header.php';
                         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                             echo "<tr>";
                             echo "<td>{$row['id']}</td>";
-                            echo "<td>{$row['name']}</td>";
+                            echo "<td>" . htmlspecialchars($row['name']) . "</td>";
                             echo "<td><a href='?delete={$row['id']}' class='btn btn-danger btn-sm' onclick='return confirm(\"Tem certeza?\")'>Excluir</a></td>";
                             echo "</tr>";
                         }

@@ -1,0 +1,221 @@
+:root {
+    --brand-blue: #0054a6;
+    --brand-green: #009639;
+    --brand-bg: #f8f9fa;
+    --text-color: #333;
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Global Typography & Reset */
+body {
+    background-color: var(--brand-bg);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: var(--text-color);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+/* Override Bootstrap Colors */
+.bg-primary { background-color: var(--brand-blue) !important; }
+.text-primary { color: var(--brand-blue) !important; }
+.btn-primary {
+    background-color: var(--brand-blue) !important;
+    border-color: var(--brand-blue) !important;
+    box-shadow: 0 2px 4px rgba(0, 84, 166, 0.3);
+}
+.btn-primary:hover {
+    background-color: #00448a !important;
+    box-shadow: 0 4px 8px rgba(0, 84, 166, 0.4);
+    transform: translateY(-1px);
+}
+
+.bg-success { background-color: var(--brand-green) !important; }
+.text-success { color: var(--brand-green) !important; }
+.btn-success {
+    background-color: var(--brand-green) !important;
+    border-color: var(--brand-green) !important;
+    box-shadow: 0 2px 4px rgba(0, 150, 57, 0.3);
+}
+.btn-success:hover {
+    background-color: #007a2e !important;
+    box-shadow: 0 4px 8px rgba(0, 150, 57, 0.4);
+    transform: translateY(-1px);
+}
+
+/* Inputs & Forms (Touch Friendly) */
+.form-control, .form-select {
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    border: 1px solid #ced4da;
+    box-shadow: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    min-height: 45px; /* Better for touch */
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--brand-blue);
+    box-shadow: 0 0 0 3px rgba(0, 84, 166, 0.15);
+}
+
+/* Cards (Modern Look) */
+.card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 1.5rem;
+    overflow: hidden; /* Ensure headers respect radius */
+}
+
+.card:hover {
+    /* Optional: Subtle lift effect for interactive cards */
+    /* transform: translateY(-2px); */
+    /* box-shadow: var(--hover-shadow); */
+}
+
+.card-header {
+    background-color: white !important;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 1rem 1.5rem;
+    font-weight: 700;
+    color: var(--brand-blue) !important; /* Blue text instead of background */
+}
+
+.card-header.bg-primary, 
+.card-header.bg-success {
+    background-color: var(--brand-blue) !important;
+    color: white !important;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* Navbar Improvements */
+.navbar-custom {
+    background-color: white !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border-bottom: 3px solid var(--brand-green);
+    padding: 0.8rem 1rem;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: #333 !important;
+    font-size: 1.3rem;
+}
+
+.logo-img {
+    height: 50px;
+    border-radius: 8px;
+}
+
+.nav-link {
+    font-weight: 600;
+    color: #555 !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--brand-blue) !important;
+    background-color: rgba(0, 84, 166, 0.05);
+}
+
+/* Tables (Responsive & Styled) */
+.table-responsive {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table {
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+
+.table thead th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #e9ecef;
+    color: #6c757d;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(0, 84, 166, 0.02);
+}
+
+/* Mobile Optimizations (< 768px) */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .navbar-brand {
+        font-size: 1.1rem;
+    }
+
+    .logo-img {
+        height: 35px;
+    }
+
+    .card-body {
+        padding: 1rem;
+    }
+    
+    /* Make tables scrollable horizontally on mobile automatically */
+    .table-wrapper-mobile {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Adjust buttons for easier touch */
+    .btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 1rem;
+    }
+    
+    .btn-sm {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Kiosk Specific Styles */
+.kiosk-mode .btn-option {
+    height: 120px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+    border-width: 2px;
+}
+
+.kiosk-mode .btn-option i {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+/* Utility Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+}
